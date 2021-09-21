@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="CSS/universal.css">
   <link rel="stylesheet" href="CSS/index.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <title>Frontend Mentor | Job Listings</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -22,31 +22,31 @@
 
     </div>
     <div class="jobs-container">
-      <div class="jobs-container--element">
+      <div v-for="job in jobs" :class="{'new-job': job.new }" class="jobs-container--element">
         <div class="lef-job-container">
           <div class="job-image-container">
-            <img src="./images/manage.svg" alt="" class="company-logo">
+            <img :src="'.' + job.logo" :alt="job.company + 'logo' " class="company-logo">
           </div>
   
           <div class="job-info-container">
             <div class="job-info-container--company-info">
-              <h3 class="company-info--h3">Photosnap</h3>
+              <h3 class="company-info--h3">{{ job.company }}</h3>
   
               <ul class="company-properties">
-                <li class="company-properties--element new">NEW!</li>
-                <li class="company-properties--element">featured</li>
+                <li v-if="job.new" class="company-properties--element new">NEW!</li>
+                <li v-if="job.featured" class="company-properties--element">featured</li>
               </ul>
             </div>
   
             <div class="job-info-container--job-title">
-              <h1 class="job-title">Senior Frontend Developer</h1>
+              <h1 class="job-title">{{ job.position }}</h1>
             </div>
   
             <div class="job-info-container--job-details">
               <ul class="job-details">
-                <li class="job-details--element">1d ago</li>
-                <li class="job-details--element">FullTime</li>
-                <li class="job-details--element">USA only</li>
+                <li class="job-details--element">{{ job.postedAt }}</li>
+                <li class="job-details--element">{{ job.contract }}</li>
+                <li class="job-details--element">{{ job.location }}</li>
               </ul>
             </div>
           </div>
@@ -54,184 +54,18 @@
         </div>
         
         <ul class="job-requisites">
-          <li class="job-requisites--element">Frontend</li>
+          <li class="job-requisites--element">{{ job.role }}</li>
+          <li class="job-requisites--element">{{ job.level }}</li>
+          <li v-for="language in job.languages" class="job-requisites--element">{{ language }}</li>
+          <li v-for="tool in job.tools" class="job-requisites--element">{{ tool }}</li>
         </ul>
       </div>
     </div>
   </div>
-  <!-- Item Start -->
-  Photosnap
-  New!
-  Featured
-  Senior Frontend Developer
-  1d ago
-  Full Time
-  USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Senior
-  <!-- Languages -->
-  HTML
-  CSS
-  JavaScript
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Manage
-  New!
-  Featured
-  Fullstack Developer
-  1d ago
-  Part Time
-  Remote
-  <!-- Role -->
-  Fullstack
-  <!-- Level -->
-  Midweight
-  <!-- Languages -->
-  Python
-  <!-- Tools -->
-  React
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Account
-  New!
-  Junior Frontend Developer
-  2d ago
-  Part Time
-  USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  JavaScript
-  <!-- Tools -->
-  React
-  Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  MyHome
-  Junior Frontend Developer
-  5d ago
-  Contract
-  USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  CSS
-  JavaScript
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Loop Studios
-  Software Engineer
-  1w ago
-  Full Time
-  Worldwide
-  <!-- Role -->
-  Fullstack
-  <!-- Level -->
-  Midweight
-  <!-- Languages -->
-  JavaScript
-  Ruby
-  <!-- Tools -->
-  Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  FaceIt
-  Junior Backend Developer
-  2w ago
-  Full Time
-  UK only
-  <!-- Role -->
-  Backend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  Ruby
-  <!-- Tools -->
-  RoR
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Shortly
-  Junior Developer
-  2w ago
-  Full Time
-  Worldwide
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  HTML
-  JavaScript
-  <!-- Tools -->
-  Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Insure
-  Junior Frontend Developer
-  2w ago
-  Full Time
-  USA only
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  JavaScript
-  <!-- Tools -->
-  Vue
-  Sass
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  Eyecam Co.
-  Full Stack Engineer
-  3w ago
-  Full Time
-  Worldwide
-  <!-- Role -->
-  Fullstack
-  <!-- Level -->
-  Midweight
-  <!-- Languages -->
-  JavaScript
-  Python
-  <!-- Tools -->
-  Django
-  <!-- Item End -->
-
-  <!-- Item Start -->
-  The Air Filter Company
-  Front-end Dev
-  1mo ago
-  Part Time
-  Worldwide
-  <!-- Role -->
-  Frontend
-  <!-- Level -->
-  Junior
-  <!-- Languages -->
-  JavaScript
-  <!-- Tools -->
-  React
-  Sass
-  <!-- Item End -->
-  
+  <script src="./JS/index.js"></script>
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="https://github.com/EufranioDiogo">Eufránio Diogo</a>.
   </div>
 </body>
 </html>
