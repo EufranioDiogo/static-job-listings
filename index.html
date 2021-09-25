@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <title>Frontend Mentor | Job Listings</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 --> 
   <style>
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
@@ -20,12 +20,33 @@
   <div id="app">
     <div class="header-container">
 
+      <div class="filter-header-container">
+        <div class="tags-container">
+
+          <div v-for="tag in tagsToSearch" class="tag-element">
+            <span class="tag-element--text">
+              {{ tag }}
+            </span>
+
+            <button class="tag-element--close-button" @click="deleteTagToTheSearchFilter(tag)">
+              <img src="./images/icon-remove.svg" alt="" class="tag-element--close-button--img" >
+            </button>
+          </div>
+
+
+        </div>
+
+
+        <button class="clear-clean" @click="deleteAllSearchFilterTags">
+          clear all
+        </button>
+      </div>
     </div>
     <div class="jobs-container">
-      <div v-for="job in jobs" :class="{'new-job': job.new }" class="jobs-container--element">
+      <div v-for="job in jobsListed" :class="{'new-job': job.new }" class="jobs-container--element">
         <div class="lef-job-container">
           <div class="job-image-container">
-            <img :src="'.' + job.logo" :alt="job.company + 'logo' " class="company-logo">
+            <img :src="'.' + job.logo" :alt="job.company + 'logo'" class="company-logo">
           </div>
   
           <div class="job-info-container">
@@ -54,10 +75,10 @@
         </div>
         
         <ul class="job-requisites">
-          <li class="job-requisites--element">{{ job.role }}</li>
-          <li class="job-requisites--element">{{ job.level }}</li>
-          <li v-for="language in job.languages" class="job-requisites--element">{{ language }}</li>
-          <li v-for="tool in job.tools" class="job-requisites--element">{{ tool }}</li>
+          <li class="job-requisites--element" @click="addTagSearchFilter(`${job.role}`)">{{ job.role }}</li>
+          <li class="job-requisites--element" @click="addTagSearchFilter(`${job.level}`)">{{ job.level }}</li>
+          <li v-for="language in job.languages" class="job-requisites--element" @click="addTagSearchFilter(`${language}`)">{{ language }}</li>
+          <li v-for="tool in job.tools" class="job-requisites--element" @click="addTagSearchFilter(`${tool}`)">{{ tool }}</li>
         </ul>
       </div>
     </div>
